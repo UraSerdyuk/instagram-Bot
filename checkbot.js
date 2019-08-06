@@ -1,4 +1,6 @@
 let start = true;
+let status = null;
+
 // на страничке инициализирует кнопки , по которым брать доступ
 function init() {
   start = false;
@@ -15,27 +17,29 @@ function init() {
   );
   return arr;
 }
-// открывает список пользователей
+
+// // открывает список пользователей
 function getFollowers() {
-  setTimeout(function() {
-    let arr = init();
-    arr[2].click();
-  }, 6000);
+  let arr = init();
+  arr[2].click();
 }
-// выбирает первый пост
+
+// // выбирает первый пост
 function getFirstPost() {
   let div = document.querySelector("._9AhH0");
-
-  if (div) {
-    setTimeout(likeFirstPhoto, 2100);
+  setTimeout(() => {
     div.click();
-    setTimeout(closeLikedPost, 2400);
-    setTimeout(getFollowers, 4000);
+    setTimeout(likeFirstPhoto, 2100);
+    setTimeout(closeLikedPost, 3400);
+    setTimeout(getFollowers, 5000);
     setTimeout(chooseOpenFolowers, 10000);
-  } else {
-    getFollowers();
-  }
+    setTimeout(() => {
+      checkAccaunt(init());
+    }, 15000);
+  }, 4000);
+
 }
+
 //стравим лайк открывшему пользователю
 function likeFirstPhoto() {
   let heart = document.getElementsByClassName(
@@ -46,67 +50,71 @@ function likeFirstPhoto() {
     heart.click();
   }
 }
-
-function checkPost(arr) {
-  console.log(arr);
-
-  setTimeout(() => {
-    if (checkPrivetAccaunt()) {
-      setTimeout(closeFolowers(), 2000);
-      return;
-    } 
-
-
-    if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt ){
-      setTimeout(getFollowers, 2300);
-      setTimeout(chooseOpenFolowers, 10000);
-      return;
-    } 
-
-    if (parseInt(arr[1].innerText) >= 1) {
-      setTimeout(() => {
-        getFirstPost();
-      }, 2000);
-      return;
-    }  
-      // пойти к другому пользавателю
-      setTimeout(getFollowers, 2300);
-      setTimeout(chooseOpenFolowers, 10000);
-    
-  }, 2000);
+// проверка на тип аккаунта
+async function checkAccaunt(arr) {
+  setTimeout(()=>{
+    try {
+      if (checkPrivetAccaunt()) {
+        console.log('Private accaunt');
+        (chooseFollowersInCloseAccount()) ? setTimeout(() => {
+          checkAccaunt(init());
+        }, 5000) : '';
+      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt()) {
+        console.log('0 posts');
+        setTimeout(getFollowers, 2300);
+        setTimeout(chooseOpenFolowers, 10000);
+        setTimeout(() => {
+          checkAccaunt(init());
+        }, 18000);
+      } else if (parseInt(arr[1].innerText) >= 1) {
+        console.log('normal accaunt');
+        setTimeout(() => {
+          getFirstPost();
+        }, 5000);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },5000);
 }
-
+// закрыть блок после удачного лайка
 function closeLikedPost() {
   let closeButton = document.querySelector(".ckWGn");
   closeButton.click();
+  return;
 }
 
+// выбрать пользователи из открытого списка
 function chooseOpenFolowers() {
   let openFollowers = document.querySelectorAll(".FPmhX.notranslate._0imsa");
-  openFollowers[Math.floor(Math.random() * 4)].click();
-  start = true;
-  console.log(start, "inside choose");
-  if (start) {
-    setTimeout(() => {
-      checkPost(init());
-    }, 10000);
-  }
-}
-// закрыть пост , после лайка
-function closeFolowers() {
-  let closeFolowers = document.querySelectorAll(".FPmhX.notranslate.Qj3-a");
-  closeFolowers[2].click();
-  setTimeout(checkPost(init()),1000);
+  // console.log(openFollowers);
+  openFollowers[Math.floor(Math.random() * openFollowers.length)].click();
+  return;
 }
 
+// выбрать случайного пользователя у закрытого аккаунта
+function chooseFollowersInCloseAccount() {
+  let closeFolowers = document.querySelectorAll(".FPmhX.notranslate.Qj3-a");
+  closeFolowers[Math.floor(Math.random() * closeFolowers.length)].click();
+  return true;
+}
+
+// проверка , приватный ли аккаунт 
 function checkPrivetAccaunt() {
-  console.log('!!!!!!!!!!!!!!!!!CHECKED PRIVED ACCAUNT!!!!!!!!!!!!!!!!!!!')
   let closeAccaunt = document.querySelector(".rkEop");
-  if(closeAccaunt){
+  if (closeAccaunt) {
     if (closeAccaunt.textContent === "This Account is Private") {
       return true;
     }
   }
-  
   return false;
 }
+
+// получить число от диапазона
+function randomInteger(min, max) {
+  var rand = min + Math.random() * (max + 1 - min);
+  rand = Math.floor(rand);
+  return rand;
+}
+// старт 
+checkAccaunt(init());

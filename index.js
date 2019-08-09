@@ -23,17 +23,3 @@ function show (min,max) {
     }, time);
 
 }
-
-
-
-
-
-function closeOpenFollowersWith0(){
-    closeButon = document.querySelector('.glyphsSpriteX__outline__24__grey_9.u-__7');
-    closeButon.click();
-    let arr =  init();
-    arr[2].click
-  };
-
-
-  'Це приватний обліковий запис'

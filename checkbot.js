@@ -103,7 +103,7 @@ function chooseFollowersInCloseAccount() {
 function checkPrivetAccaunt() {
   let closeAccaunt = document.querySelector(".rkEop");
   if (closeAccaunt) {
-    if (closeAccaunt.textContent === "This Account is Private") {
+    if (closeAccaunt.textContent === "This Account is Private" || closeAccaunt.textContent === 'Це приватний обліковий запис') {
       return true;
     }
   }

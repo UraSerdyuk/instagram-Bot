@@ -36,4 +36,4 @@ function closeOpenFollowersWith0(){
   };
 
 
-  'Це приватний обліковий запис'
+  

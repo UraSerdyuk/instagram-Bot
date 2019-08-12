@@ -27,17 +27,18 @@ function getFollowers() {
 // // выбирает первый пост
 function getFirstPost() {
   let div = document.querySelector("._9AhH0");
+console.log(div);
+div.click();
   setTimeout(() => {
-    div.click();
-    setTimeout(likeFirstPhoto, 2100);
-    setTimeout(closeLikedPost, 3400);
-    setTimeout(getFollowers, 5000);
-    setTimeout(chooseOpenFolowers, 10000);
+    
+    setTimeout(likeFirstPhoto, 4000);
+    setTimeout(closeLikedPost, 7000);
+    setTimeout(getFollowers, 10000);
+    setTimeout(chooseOpenFolowers, 15000);
     setTimeout(() => {
       checkAccaunt(init());
-    }, 15000);
+    }, 30000);
   }, 4000);
-
 }
 
 //стравим лайк открывшему пользователю
@@ -52,30 +53,44 @@ function likeFirstPhoto() {
 }
 // проверка на тип аккаунта
 async function checkAccaunt(arr) {
-  setTimeout(()=>{
-    try {
-      if (checkPrivetAccaunt()) {
-        console.log('Private accaunt');
-        (chooseFollowersInCloseAccount()) ? setTimeout(() => {
-          checkAccaunt(init());
-        }, 5000) : '';
-      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt()) {
-        console.log('0 posts');
-        setTimeout(getFollowers, 2300);
-        setTimeout(chooseOpenFolowers, 10000);
-        setTimeout(() => {
-          checkAccaunt(init());
-        }, 18000);
-      } else if (parseInt(arr[1].innerText) >= 1) {
-        console.log('normal accaunt');
-        setTimeout(() => {
-          getFirstPost();
-        }, 5000);
+  console.log(arr);
+  if(arr[1]){
+    setTimeout(() => {
+      try {
+        if (checkPrivetAccaunt()) {
+  
+          console.log("Private accaunt");
+  
+          chooseFollowersInCloseAccount()
+            ? setTimeout(() => {
+                checkAccaunt(init());
+              }, 5000)
+            : "";
+        } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt()) {
+  
+          console.log("0 posts");
+  
+          setTimeout(getFollowers, 4000);
+          setTimeout(chooseOpenFolowers, 10000);
+          setTimeout(() => {
+            checkAccaunt(init());
+          }, 18000);
+        } else if (parseInt(arr[1].innerText) >= 1) {
+  
+          console.log("normal accaunt");
+  
+          setTimeout(() => {
+            getFirstPost();
+          }, 5000);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error)
-    }
-  },5000);
+    }, 5000);
+  }else{
+  let arr =   checkAccaunt(init());
+  console.log(arr,'www')
+  }
 }
 // закрыть блок после удачного лайка
 function closeLikedPost() {
@@ -99,11 +114,15 @@ function chooseFollowersInCloseAccount() {
   return true;
 }
 
-// проверка , приватный ли аккаунт 
+// проверка , приватный ли аккаунт
 function checkPrivetAccaunt() {
   let closeAccaunt = document.querySelector(".rkEop");
   if (closeAccaunt) {
-    if (closeAccaunt.textContent === "This Account is Private") {
+    if (
+      closeAccaunt.textContent === "This Account is Private" ||
+      closeAccaunt.textContent === "Це приватний обліковий запис" ||
+      closeAccaunt.textContent === 'Это закрытый аккаунт'
+    ) {
       return true;
     }
   }
@@ -116,5 +135,5 @@ function randomInteger(min, max) {
   rand = Math.floor(rand);
   return rand;
 }
-// старт 
+// старт
 checkAccaunt(init());

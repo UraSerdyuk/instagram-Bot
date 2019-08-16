@@ -52,7 +52,7 @@ function likeFirstPhoto() {
 }
 // проверка на тип аккаунта
 async function checkAccaunt(arr) {
-  setTimeout(()=>{
+  setTimeout(() => {
     try {
       if (checkPrivetAccaunt()) {
         console.log('Private accaunt');
@@ -75,7 +75,7 @@ async function checkAccaunt(arr) {
     } catch (error) {
       console.log(error)
     }
-  },5000);
+  }, 5000);
 }
 // закрыть блок после удачного лайка
 function closeLikedPost() {
@@ -95,8 +95,15 @@ function chooseOpenFolowers() {
 // выбрать случайного пользователя у закрытого аккаунта
 function chooseFollowersInCloseAccount() {
   let closeFolowers = document.querySelectorAll(".FPmhX.notranslate.Qj3-a");
-  closeFolowers[Math.floor(Math.random() * closeFolowers.length)].click();
-  return true;
+  if (closeFolowers.length === 0) {
+    let home = document.querySelector('.glyphsSpriteUser__outline__24__grey_9.u-__7');
+    home.click();
+    return true;
+  } else {
+    closeFolowers[Math.floor(Math.random() * closeFolowers.length)].click();
+    return true;
+  }
+
 }
 
 // проверка , приватный ли аккаунт 

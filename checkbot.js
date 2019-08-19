@@ -23,10 +23,8 @@ function getFollowers() {
 // // выбирает первый пост
 function getFirstPost() {
   let div = document.querySelector("._9AhH0");
-console.log(div);
 div.click();
   setTimeout(() => {
-    
     setTimeout(likeFirstPhoto, 4000);
     setTimeout(closeLikedPost, 7000);
     setTimeout(getFollowers, 10000);

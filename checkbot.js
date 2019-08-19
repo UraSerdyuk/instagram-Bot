@@ -57,9 +57,9 @@ async function checkAccaunt(arr) {
       if (checkPrivetAccaunt()) {
         console.log('Private accaunt');
         (chooseFollowersInCloseAccount()) ? setTimeout(() => {
-          checkAccaunt(init());
+           checkAccaunt(init());
         }, 5000) : '';
-      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt()) {
+      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) !== 0) {
         console.log('0 posts');
         setTimeout(getFollowers, 2300);
         setTimeout(chooseOpenFolowers, 10000);
@@ -71,12 +71,17 @@ async function checkAccaunt(arr) {
         setTimeout(() => {
           getFirstPost();
         }, 5000);
+      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) === 0) {
+        let home = document.querySelector('.glyphsSpriteUser__outline__24__grey_9.u-__7');
+        home.click();
+        setTimeout(() => {checkAccaunt(init());}, 5000)
       }
     } catch (error) {
       console.log(error)
     }
   }, 5000);
 }
+
 // закрыть блок после удачного лайка
 function closeLikedPost() {
   let closeButton = document.querySelector(".ckWGn");

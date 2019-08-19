@@ -1,9 +1,5 @@
-let start = true;
-let status = null;
-
 // на страничке инициализирует кнопки , по которым брать доступ
 function init() {
-  start = false;
   let menuButtomn,
     posts,
     followers,
@@ -57,7 +53,7 @@ async function checkAccaunt(arr) {
       if (checkPrivetAccaunt()) {
         console.log('Private accaunt');
         (chooseFollowersInCloseAccount()) ? setTimeout(() => {
-           checkAccaunt(init());
+          checkAccaunt(init());
         }, 5000) : '';
       } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) !== 0) {
         console.log('0 posts');
@@ -66,16 +62,21 @@ async function checkAccaunt(arr) {
         setTimeout(() => {
           checkAccaunt(init());
         }, 18000);
+      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) === 0 && parseInt(arr[3].innerText) > 1) {
+        console.log('0 post 0 folowers');
+        arr[3].click();
+        setTimeout(() => {chooseOpenFolowers(); }, 4000);
+        setTimeout(() => { checkAccaunt(init()); }, 8000);
+      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) === 0 && parseInt(arr[3].innerText) ===  0) {
+        let home = document.querySelector('.glyphsSpriteUser__outline__24__grey_9.u-__7');
+        home.click();
+        setTimeout(() => { checkAccaunt(init()); }, 5000);
       } else if (parseInt(arr[1].innerText) >= 1) {
         console.log('normal accaunt');
         setTimeout(() => {
           getFirstPost();
         }, 5000);
-      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) === 0) {
-        let home = document.querySelector('.glyphsSpriteUser__outline__24__grey_9.u-__7');
-        home.click();
-        setTimeout(() => {checkAccaunt(init());}, 5000)
-      }
+      } 
     } catch (error) {
       console.log(error)
     }
@@ -92,7 +93,6 @@ function closeLikedPost() {
 // выбрать пользователи из открытого списка
 function chooseOpenFolowers() {
   let openFollowers = document.querySelectorAll(".FPmhX.notranslate._0imsa");
-  // console.log(openFollowers);
   openFollowers[Math.floor(Math.random() * openFollowers.length)].click();
   return;
 }
@@ -111,11 +111,15 @@ function chooseFollowersInCloseAccount() {
 
 }
 
-// проверка , приватный ли аккаунт 
+// проверка , приватный ли аккаунт
 function checkPrivetAccaunt() {
   let closeAccaunt = document.querySelector(".rkEop");
   if (closeAccaunt) {
-    if (closeAccaunt.textContent === "This Account is Private" || closeAccaunt.textContent === 'Це приватний обліковий запис') {
+    if (
+      closeAccaunt.textContent === "This Account is Private" ||
+      closeAccaunt.textContent === "Це приватний обліковий запис" ||
+      closeAccaunt.textContent === 'Это закрытый аккаунт'
+    ) {
       return true;
     }
   }

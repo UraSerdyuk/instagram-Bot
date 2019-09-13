@@ -1,7 +1,6 @@
 // // // class betchBot {
 // // // _start =  false
 
-
 // // //  init() {
 // // //     start = false;
 // // //   let menuButtomn,
@@ -43,15 +42,12 @@
 // //   console.error(err);
 // // });
 
-
-
 // let tweeps = [
 //   { name: 'Peter' },
 //   { name: 'Mary' }
 // ];
 
 // var str = "Mentioned by " + tweeps.map(prop("name")).join(", ");
-
 
 // function prop (str) {
 //   return function(el) {
@@ -75,12 +71,9 @@
 //   }
 // }
 
-
-// // написать функцию prop 
+// // написать функцию prop
 
 // "Mentioned by Peter, Mary"
-
-
 
 // let arr = [2, 3, 4235, 6, 343, -1, 34, 111, 1, 12, -555];
 
@@ -98,3 +91,33 @@
 // }
 
 // console.log(sort(arr));
+
+
+
+
+
+
+//----------------------------- замікание  ----------------------------------------------------------
+// function Counter() {
+//   var count = 0;
+//   return function(){
+//     count++;
+//     return count;
+//   }
+// }
+
+// let counter = Counter();
+
+// console.log(counter());
+
+
+
+// function sum(a) {
+
+
+// return function(b) {
+// if(typeof b !== )
+// }
+// }
+
+// console.log(sum(1,2)());

@@ -54,7 +54,8 @@ async function checkAccaunt(arr) {
         console.log('Private accaunt');
         (chooseFollowersInCloseAccount()) ? setTimeout(() => {
           checkAccaunt(init());
-        }, 5000) : '';
+        }, 5000) : (()=>{ console.log('users nont found in privet ackaunt')});
+
       } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) !== 0) {
         console.log('0 posts');
         setTimeout(getFollowers, 2300);

@@ -49,10 +49,10 @@ function randomInteger(min, max) {
 
 // функция подписки
 function subscribe() {
-  let arr2 = document.querySelectorAll('._0mzm-.sqdOP.L3NKy[type="button"]');
+  let arr2 = document.querySelectorAll('.sqdOP.L3NKy[type="button"]');
 
   
-  let item = 5;
+  let item = 0;
   
   function show(min, max) {
     let time = randomInteger(min, max);

@@ -23,3 +23,5 @@ function show (min,max) {
     }, time);
 
 }
+
+show(3000,6000);

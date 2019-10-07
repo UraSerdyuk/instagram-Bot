@@ -56,9 +56,9 @@ function newScroll(arr) {
     list.scrollTo(val1, val2);
     val = val2;
     val2 += 100;
-    console.log(val2);
+    // console.log(val2);
 
-    if (val2 > 45000) {
+    if (val2 > 90000) {
       setTimeout(() => {
         checkOrSubscribeUser(arr, init());
       }, 1000);
@@ -129,28 +129,6 @@ function checkOrSubscribeUser(arr, list) {
         }, randomInteger(50000, 80000));
       }
     }, 2000);
-    // console.log('inside myLoop');
-    // setTimeout(function() {
-
-    //   if (arr.includes(li[num].querySelector(".FPmhX.notranslate._0imsa").textContent)) {
-    //     // console.log(li[num].querySelector(".FPmhX.notranslate._0imsa").textContent);
-    //     console.log("такой пользователь подписан на тебя ");
-
-    //   } else {
-    //     // console.log(li[num].querySelector(".FPmhX.notranslate._0imsa").textContent);
-    //     console.log("такой не подписан , можно удалять !!!");
-
-    //     li[num].querySelector('.sqdOP.L3NKy._8A5w5[type="button"]').click();
-    //     setTimeout(() => {
-    //       document.querySelector('.aOOlW.-Cab_').click();
-    //     }, randomInteger(20000, 25000));
-    //   }
-
-    //   // console.log('incremrnt')
-    //   num++;
-    //   myLoop();
-
-    // }, randomInteger(30000));
   }
 }
 

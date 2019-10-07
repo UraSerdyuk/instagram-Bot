@@ -33,7 +33,7 @@ function scroll() {
     val2 += 100;
     console.log(val2);
 
-    if (val2 > 20000) {
+    if (val2 > 50000) {
       subscribe();
       return clearInterval(interval);
     }
@@ -42,6 +42,7 @@ function scroll() {
 
 // функция подписки
 function subscribe() {
+  
   console.log("start unsabscribe");
   let arr2 = document.querySelectorAll(
     '._0mzm-.sqdOP.L3NKy._8A5w5[type="button"]'

@@ -36,7 +36,7 @@ function scroll() {
     val2 += 100;
     // console.log(val2);
 
-    if (val2 > 20000) {
+    if (val2 > 45000) {
       setTimeout(() => {
         closeFolowersBlock(getNames());
       }, 1000);
@@ -58,7 +58,7 @@ function newScroll(arr) {
     val2 += 100;
     console.log(val2);
 
-    if (val2 > 20000) {
+    if (val2 > 45000) {
       setTimeout(() => {
         checkOrSubscribeUser(arr, init());
       }, 1000);
@@ -99,44 +99,59 @@ function openUserFollow(arr) {
 // функция проверки
 function checkOrSubscribeUser(arr, list) {
   // 8
-
+  console.log("number of users", arr);
   let li = document.querySelectorAll(".wo9IH");
   let num = 0;
   let numberOfFollowers = +list[3].children[0].textContent;
 
+  myLoop();
+
   function myLoop() {
-    setTimeout(function() {
+  
+    setTimeout(() => {
       if (
         arr.includes(
           li[num].querySelector(".FPmhX.notranslate._0imsa").textContent
         )
       ) {
-        console.log(
-          li[num].querySelector(".FPmhX.notranslate._0imsa").textContent
-        );
-        console.log("такой пользователь подписан на тебя ");
-      } else {
-        console.log(
-          li[num].querySelector(".FPmhX.notranslate._0imsa").textContent
-        );
-        console.log("такой не подписан , можно удалять !!!");
-
-        li[num]
-          .querySelector('._0mzm-.sqdOP.L3NKy._8A5w5[type="button"]')
-          .click();
-
-        setTimeout(() => {
-          document.querySelector('.aOOlW.-Cab_').click();
-        }, randomInteger(5000, 10000));
-      }
-      num++;
-      if (num < numberOfFollowers) {
+        console.log("подписан ");
+        num++;
         myLoop();
+      } else {
+        setTimeout(() => {
+          li[num].querySelector('.sqdOP.L3NKy._8A5w5[type="button"]').click();
+        }, randomInteger(30000, 40000));
+        setTimeout(() => {
+          console.log('dellete');
+          document.querySelector(".aOOlW.-Cab_").click();
+          num++;
+          myLoop();
+        }, randomInteger(50000, 80000));
       }
-    }, randomInteger(60000, 100000));
-  }
+    }, 2000);
+    // console.log('inside myLoop');
+    // setTimeout(function() {
 
-  myLoop();
+    //   if (arr.includes(li[num].querySelector(".FPmhX.notranslate._0imsa").textContent)) {
+    //     // console.log(li[num].querySelector(".FPmhX.notranslate._0imsa").textContent);
+    //     console.log("такой пользователь подписан на тебя ");
+
+    //   } else {
+    //     // console.log(li[num].querySelector(".FPmhX.notranslate._0imsa").textContent);
+    //     console.log("такой не подписан , можно удалять !!!");
+
+    //     li[num].querySelector('.sqdOP.L3NKy._8A5w5[type="button"]').click();
+    //     setTimeout(() => {
+    //       document.querySelector('.aOOlW.-Cab_').click();
+    //     }, randomInteger(20000, 25000));
+    //   }
+
+    //   // console.log('incremrnt')
+    //   num++;
+    //   myLoop();
+
+    // }, randomInteger(30000));
+  }
 }
 
 // вспомогающая функция

@@ -34,7 +34,7 @@ function scroll() {
     list.scrollTo(val1, val2);
     val = val2;
     val2 += 100;
-    // console.log(val2);
+    console.log(val2);
 
     if (val2 > 45000) {
       setTimeout(() => {
@@ -56,12 +56,13 @@ function newScroll(arr) {
     list.scrollTo(val1, val2);
     val = val2;
     val2 += 100;
-    // console.log(val2);
+    console.log(val2);
 
-    if (val2 > 90000) {
+    if (val2 > 100000) {
       setTimeout(() => {
         checkOrSubscribeUser(arr, init());
       }, 1000);
+      console.log("start");
       return clearInterval(interval);
     }
   }, 200);
@@ -81,7 +82,7 @@ function getNames() {
 // закрыть окно после получения масива имен
 function closeFolowersBlock(arr) {
   // 5
-  document.querySelector(".glyphsSpriteX__outline__24__grey_9.u-__7").click();
+  document.querySelector(".wpO6b").click();
   setTimeout(() => {
     openUserFollow(arr);
   }, 2000);
@@ -107,7 +108,6 @@ function checkOrSubscribeUser(arr, list) {
   myLoop();
 
   function myLoop() {
-  
     setTimeout(() => {
       if (
         arr.includes(
@@ -122,13 +122,13 @@ function checkOrSubscribeUser(arr, list) {
           li[num].querySelector('.sqdOP.L3NKy._8A5w5[type="button"]').click();
         }, randomInteger(30000, 40000));
         setTimeout(() => {
-          console.log('dellete');
+          console.log("dellete");
           document.querySelector(".aOOlW.-Cab_").click();
           num++;
           myLoop();
-        }, randomInteger(50000, 80000));
+        }, randomInteger(41000, 50000));
       }
-    }, 2000);
+    }, 500);
   }
 }
 

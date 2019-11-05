@@ -10,11 +10,11 @@ function show(min, max) {
   let time = randomInteger(min, max);
   setTimeout(function() {
     let heart = document.getElementsByClassName(
-        "glyphsSpriteHeart__outline__24__grey_9"
+        "glyphsSpriteHeart__outline__24__grey_9 u-__7"
       ),
       arrow = document.querySelector(".coreSpriteRightPaginationArrow");
-    if (heart[1]) {
-      heart = heart[1].parentElement;
+    if (heart[0]) {
+      heart = heart[0].parentElement;
       likesGiven++, heart.click();
     }
     arrow.click();

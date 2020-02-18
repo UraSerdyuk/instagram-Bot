@@ -36,7 +36,7 @@ function scroll() {
     val2 += 100;
     console.log(val2);
 
-    if (val2 > 45000) {
+    if (val2 > 100000) {
       setTimeout(() => {
         closeFolowersBlock(getNames());
       }, 1000);

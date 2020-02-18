@@ -33,16 +33,15 @@ function getFirstPost() {
       checkAccaunt(init());
     }, 15000);
   }, 4000);
-
 }
 
 //стравим лайк открывшему пользователю
 function likeFirstPhoto() {
   let heart = document.getElementsByClassName(
-    "glyphsSpriteHeart__outline__24__grey_9"
+    "glyphsSpriteHeart__outline__24__grey_9 u-__7"
   );
-  if (heart[1]) {
-    heart = heart[1].parentElement;
+  if (heart[0]) {
+    heart = heart[0].parentElement;
     heart.click();
   }
 }
@@ -51,34 +50,60 @@ async function checkAccaunt(arr) {
   setTimeout(() => {
     try {
       if (checkPrivetAccaunt()) {
-        console.log('Private accaunt');
-        (chooseFollowersInCloseAccount()) ? setTimeout(() => {
-          checkAccaunt(init());
-        }, 5000) : '';
-      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) !== 0) {
-        console.log('0 posts');
+        console.log("Private accaunt");
+        chooseFollowersInCloseAccount()
+          ? setTimeout(() => {
+              checkAccaunt(init());
+            }, 5000)
+          : () => {
+              console.log("users nont found in privet ackaunt");
+            };
+      } else if (
+        parseInt(arr[1].innerText) === 0 &&
+        !checkPrivetAccaunt() &&
+        parseInt(arr[2].innerText) !== 0
+      ) {
+        console.log("0 posts");
         setTimeout(getFollowers, 2300);
         setTimeout(chooseOpenFolowers, 10000);
         setTimeout(() => {
           checkAccaunt(init());
         }, 18000);
-      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) === 0 && parseInt(arr[3].innerText) > 1) {
-        console.log('0 post 0 folowers');
+      } else if (
+        parseInt(arr[1].innerText) === 0 &&
+        !checkPrivetAccaunt() &&
+        parseInt(arr[2].innerText) === 0 &&
+        parseInt(arr[3].innerText) > 1
+      ) {
+        console.log("0 post 0 folowers");
         arr[3].click();
-        setTimeout(() => {chooseOpenFolowers(); }, 4000);
-        setTimeout(() => { checkAccaunt(init()); }, 8000);
-      } else if (parseInt(arr[1].innerText) === 0 && !checkPrivetAccaunt() && parseInt(arr[2].innerText) === 0 && parseInt(arr[3].innerText) ===  0) {
-        let home = document.querySelector('.glyphsSpriteUser__outline__24__grey_9.u-__7');
+        setTimeout(() => {
+          chooseOpenFolowers();
+        }, 4000);
+        setTimeout(() => {
+          checkAccaunt(init());
+        }, 8000);
+      } else if (
+        parseInt(arr[1].innerText) === 0 &&
+        !checkPrivetAccaunt() &&
+        parseInt(arr[2].innerText) === 0 &&
+        parseInt(arr[3].innerText) === 0
+      ) {
+        let home = document.querySelector(
+          ".glyphsSpriteUser__outline__24__grey_9.u-__7"
+        );
         home.click();
-        setTimeout(() => { checkAccaunt(init()); }, 5000);
+        setTimeout(() => {
+          checkAccaunt(init());
+        }, 5000);
       } else if (parseInt(arr[1].innerText) >= 1) {
-        console.log('normal accaunt');
+        console.log("normal accaunt");
         setTimeout(() => {
           getFirstPost();
         }, 5000);
-      } 
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, 5000);
 }
@@ -94,21 +119,26 @@ function closeLikedPost() {
 function chooseOpenFolowers() {
   let openFollowers = document.querySelectorAll(".FPmhX.notranslate._0imsa");
   openFollowers[Math.floor(Math.random() * openFollowers.length)].click();
-  return;
+  return true;
 }
 
 // выбрать случайного пользователя у закрытого аккаунта
 function chooseFollowersInCloseAccount() {
+  if (!(document.querySelectorAll(".FPmhX.notranslate.Qj3-a").length > 2)) {
+    document.querySelectorAll(".XrOey")[2].firstElementChild.click();
+    return true;
+  }
+
   let closeFolowers = document.querySelectorAll(".FPmhX.notranslate.Qj3-a");
+
   if (closeFolowers.length === 0) {
-    let home = document.querySelector('.glyphsSpriteUser__outline__24__grey_9.u-__7');
+    let home = document.querySelector(".FPmhX.notranslate.Qj3-a");
     home.click();
     return true;
   } else {
     closeFolowers[Math.floor(Math.random() * closeFolowers.length)].click();
     return true;
   }
-
 }
 
 // проверка , приватный ли аккаунт
@@ -118,7 +148,7 @@ function checkPrivetAccaunt() {
     if (
       closeAccaunt.textContent === "This Account is Private" ||
       closeAccaunt.textContent === "Це приватний обліковий запис" ||
-      closeAccaunt.textContent === 'Это закрытый аккаунт'
+      closeAccaunt.textContent === "Это закрытый аккаунт"
     ) {
       return true;
     }
@@ -132,5 +162,5 @@ function randomInteger(min, max) {
   rand = Math.floor(rand);
   return rand;
 }
-// старт 
+// старт
 checkAccaunt(init());
